@@ -1,16 +1,29 @@
+package OOP1
 import java.util.*
 
 fun main(){
     val scanner = Scanner(System.`in`)
 
-    val book1 = Buku("Filosofi Teras", "mardin", 80000)
-    val book2 = Buku("Pergi", "Romi", 90000)
+    print("Nasukkan Nama")
+    var inputNama = scanner.next()
 
-    println("====== Daftar Buku ======")
+    val book1 = Buku(inputNama)
+
+    print("Nasukkan Nama")
+    inputNama = scanner.next()
+    val book2 = Buku(inputNama)
+
+    val array  = arrayOf(book1.Tampilkan(),book2.Tampilkan())
+
+    println(array)
+
+
+
+    println("====== Daftar OOP1.Buku ======")
     println("1.")
-    book1.Tampilkan()
+
     println("2.")
-    book2.Tampilkan()
+
 
     print("Silakan pilih buku (1/2): ")
     val pilihan = scanner.nextInt()
@@ -19,7 +32,7 @@ fun main(){
         1 -> book1
         2 -> book2
         else -> {
-            println("Buku tidak tersedia.")
+            println("OOP1.Buku tidak tersedia.")
             return
         }
     }
