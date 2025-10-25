@@ -1,50 +1,85 @@
 package OOP1
 import java.util.*
 
-fun main(){
+fun main() {
     val scanner = Scanner(System.`in`)
 
-    print("Nasukkan Nama")
-    var inputNama = scanner.next()
+    print("Masukkan Judul Buku ke-1: ")
+    val inputNama1 = scanner.nextLine().trim()
+    val book1 = Buku(inputNama1, 25000)
 
-    val book1 = Buku(inputNama)
+    print("Masukkan Judul Buku ke-2: ")
+    val inputNama2 = scanner.nextLine().trim()
+    val book2 = Buku(inputNama2, 30000)
 
-    print("Nasukkan Nama")
-    inputNama = scanner.next()
-    val book2 = Buku(inputNama)
+    val daftarBuku = arrayOf(book1, book2)
 
-    val array  = arrayOf(book1.Tampilkan(),book2.Tampilkan())
+    println("\n====== Daftar Buku Tersedia ======")
+    println("1. ${daftarBuku[0].Tampilkan()}")
+    println("2. ${daftarBuku[1].Tampilkan()}")
+    println("==================================")
 
-    println(array)
+    var selectedBook: Buku? = null
 
+    while (selectedBook == null) {
+        print("Silakan pilih buku (1/2): ")
+        if (scanner.hasNextInt()) {
+            val pilihan = scanner.nextInt()
+            scanner.nextLine()
 
-
-    println("====== Daftar OOP1.Buku ======")
-    println("1.")
-
-    println("2.")
-
-
-    print("Silakan pilih buku (1/2): ")
-    val pilihan = scanner.nextInt()
-
-    val selectedBook = when (pilihan) {
-        1 -> book1
-        2 -> book2
-        else -> {
-            println("OOP1.Buku tidak tersedia.")
-            return
+            selectedBook = when (pilihan) {
+                1 -> book1
+                2 -> book2
+                else -> {
+                    println(" Pilihan tidak valid. Masukkan 1 atau 2.")
+                    null
+                }
+            }
+        } else {
+            println(" Input harus berupa angka (1 atau 2).")
+            scanner.nextLine()
         }
     }
 
-    print("Masukkan jumlah buku: ")
-    val jumlah = scanner.nextInt()
+    var jumlah = 0
+    while (jumlah <= 0) {
+        print("Masukkan jumlah buku yang dibeli: ")
+        if (scanner.hasNextInt()) {
+            val inputJumlah = scanner.nextInt()
+            scanner.nextLine()
+            if (inputJumlah > 0) {
+                jumlah = inputJumlah
+            } else {
+                println(" Jumlah buku harus lebih dari 0.")
+            }
+        } else {
+            println(" Input jumlah harus berupa angka.")
+            scanner.nextLine()
+        }
+    }
 
-    val transaksi = Transaksi(selectedBook, jumlah)
-    println("Total harga: Rp${transaksi.total}")
+    val transaksi = Transaksi(selectedBook!!, jumlah)
 
-    print("Masukkan uang pembayaran: Rp")
-    val bayar = scanner.nextInt()
+    println("Total harga yang harus dibayar: Rp${transaksi.total}")
+
+    var bayar = 0
+    while (bayar <= 0) {
+        print("Masukkan uang pembayaran: Rp")
+        if (scanner.hasNextInt()) {
+            val inputBayar = scanner.nextInt()
+            scanner.nextLine()
+            if (inputBayar > 0) {
+                bayar = inputBayar
+            } else {
+                println(" Uang pembayaran harus lebih dari 0.")
+            }
+        } else {
+            println(" Input pembayaran harus berupa angka.")
+            scanner.nextLine()
+        }
+    }
 
     transaksi.prosesPembayaran(bayar)
+
+    scanner.close()
 }

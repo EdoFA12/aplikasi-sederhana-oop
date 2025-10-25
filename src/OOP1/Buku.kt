@@ -1,10 +1,12 @@
 package OOP1
 
-class Buku (var namaBuku:String, var harga : Int) {
+class Buku (val namaBuku: String, val harga: Int) {
 
-    fun Tampilkan (){
-        println("Judul : $namaBuku \n")
-        println("Harga :  $harga")
+    fun Tampilkan(): String {
+        return "Judul: $namaBuku | Harga: Rp$harga"
     }
 
+    override fun toString(): String {
+        return "Judul: $namaBuku | Harga: Rp$harga"
+    }
 }
